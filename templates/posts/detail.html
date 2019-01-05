@@ -1,0 +1,245 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block script %}
+    <script src="{% static 'js/marked.min.js' %}"></script>
+{% endblock script %}
+
+{% block title %}{{ object.title }}{% endblock title %}
+{% block content %}
+
+    <div class="row">
+        <div class="col-sm-1 border-display text-center">
+            <p class="good-count text-success">{{ object.good_count }}</p>
+            <form id="good_form">
+                {% csrf_token %}
+                {% if object.is_good %}
+                    <button class="good-toggle check-button btn btn-outline-success rounded-circle p-0"><i class="fa fa-check fa-lg check-icon" aria-hidden="true"></i></button>
+                    <button class="good-toggle good-button btn btn-outline-success d-none rounded-circle p-0"><i class="fa fa-thumbs-o-up fa-lg good-icon" aria-hidden="true"></i></button>
+                {% else %}
+                    <button class="good-toggle check-button btn btn-outline-success d-none rounded-circle p-0"><i class="fa fa-check fa-lg check-icon" aria-hidden="true"></i></button>
+                    <button class="good-toggle good-button btn btn-outline-success rounded-circle p-0"><i class="fa fa-thumbs-o-up fa-lg good-icon" aria-hidden="true"></i></button>
+                {% endif %}
+            </form>
+            <hr>
+            <form id="stock_form">
+                {% csrf_token %}
+                {% if object.is_stock %}
+                    <button class="stock-toggle stock-button-close btn btn-outline-info rounded-circle p-0"><i class="fa fa-folder fa-lg stock-icon" aria-hidden="true"></i></button>
+                    <button class="stock-toggle stock-button-open btn btn-outline-info d-none rounded-circle p-0"><i class="fa fa-folder-open fa-lg stock-icon" aria-hidden="true"></i></button>
+                {% else %}
+                    <button class="stock-toggle stock-button-close btn btn-outline-info d-none rounded-circle p-0"><i class="fa fa-folder fa-lg stock-icon" aria-hidden="true"></i></button>
+                    <button class="stock-toggle stock-button-open btn btn-outline-info rounded-circle p-0"><i class="fa fa-folder-open fa-lg stock-icon" aria-hidden="true"></i></button>
+                {% endif %}
+            </form>
+            <hr>
+            <span class="small text-muted">{{ object.comments.all|length }}</span><br>
+            <span><i class="fa fa-comment fa-lg" aria-hidden="true"></i></span>
+        </div>
+        <div class="col-sm-10 border-display">
+            {% get_current_language as LANGUAGE_CODE %}
+            <div class="article-header">
+                {% if LANGUAGE_CODE != 'ja' %}
+                    Posted&nbsp;by&nbsp;<a class="text-body" href="{% url 'accounts:detail' username=object.create_user.username %}">{{ object.create_user.username }}</a>&nbsp;at&nbsp;{{ object.create_date|date:"Y/m/d G:i" }}
+                {% else %}
+                    <a class="text-body" href="{% url 'accounts:detail' username=object.create_user.username %}">{{ object.create_user.username }}&nbsp;</a>{% trans "at" %}&nbsp;{{ object.create_date|date:"Y/m/d G:i" }}&nbsp;{% trans "Posted." %}
+                {% endif %}
+                {% if is_login_user %}
+                    <button type="button" id="delete-article" class="btn btn-outline-danger float-right" data-toggle="modal" data-target="#delete">
+                        {% trans "Delete article" %}
+                    </button>
+                    <form id="delete-form" method="POST" action="{% url 'posts:delete' pk=object.id %}">
+                        {% csrf_token %}
+                        <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="delete-modal-title">{% trans "Delete article" %}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="{% trans "Close" %}">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p><strong>{{ object.title }}</strong>&nbsp;{% trans "Delete this article." %}</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans "Close" %}</button>
+                                        <button type="submit" class="btn btn-danger">{% trans "Delete" %}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <a href="{% url 'posts:update' pk=object.id %}" class="btn btn-outline-primary float-right">{% trans "Update article" %}</a>
+                {% endif %}
+            </div>
+            <hr>
+            <h1>{{ object.title }}</h1>
+            {% if object.tag %}
+                {% for tag in object.tag %}
+                    <a href="{% url 'tags:detail' tag=tag %}" class="badge badge-secondary">{{ tag }}</a>
+                {% endfor %}
+            {% endif %}
+            <hr>
+            <div class="main-text">{{ object.text }}</div>
+        </div>
+    </div>
+    {% if comments %}
+        <div class="row comment-row">
+            {% for comment in comments %}
+                <div class="col-sm-11 comment">
+                    <a href="{% url 'accounts:detail' username=comment.post_user.username %}" class="text-body">{{ comment.post_user.username }}</a>
+                    <span class="float-right text-muted small">{{ comment.create_date|date:"Y/m/d G:i" }}</span><br>
+                    <form class="good_comment_form" action="{% url 'comments:good' username=comment.post_user.username pk=comment.post.pk pk=comment.pk %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="pk" value="{{ comment.pk }}">
+                        <span class="good-comment-count text-success float-right small">{{ comment.good.all|length }}</span>
+                        {% if comment.is_good %}
+                            <button class="good-comment-toggle check-comment-button float-right text-success border rounded small"><i class="fa fa-check check-icon" aria-hidden="true"></i>&nbsp;{% trans "Good" %}</button>
+                            <button class="good-comment-toggle good-comment-button d-none float-right text-success border rounded small"><i class="fa fa-thumbs-o-up good-icon" aria-hidden="true"></i>&nbsp;{% trans "Good" %}</button>
+                        {% else %}
+                            <button class="good-comment-toggle check-comment-button d-none float-right text-success border rounded small"><i class="fa fa-check check-icon" aria-hidden="true"></i>&nbsp;{% trans "Good" %}</button>
+                            <button class="good-comment-toggle good-comment-button float-right text-success border rounded small"><i class="fa fa-thumbs-o-up good-icon" aria-hidden="true"></i>&nbsp;{% trans "Good" %}</button>
+                        {% endif %}
+                    </form>
+                    <div class="col-sm-12 border comment-area">{{ comment.text }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <div class="input-comment col-sm-10">
+        <h5>{% trans "Post comment" %}</h5>
+        <ul id="comment-tab-area" class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a href="#comment" id="comment-tab" class="nav-link active text-body" role="tab" data-toggle="tab" aria-controls="comment" aria-selected="true">{% trans "Comment" %}</a>
+            </li>
+            <li class="nav-item">
+                <a href="#preview" id="preview-tab" class="nav-link text-body" role="tab" data-toggle="tab" aria-controls="preview" aria-selected="false">{% trans "Preview" %}</a>
+            </li>
+        </ul>
+        <form method="POST" action="{% url 'comments:comment' username=object.create_user.username pk=object.pk %}">
+            <div id="comment-tab-content" class="tab-content mt-2">
+                <div id="comment" class="tab-pane active" role="tabpanel" aria-labelledby="comment-tab">
+                    {% csrf_token %}
+                    <textarea name="text" cols="20" rows="10" placeholder="{% trans "Enter comment" %}" class="form-control col-sm-12" required="" id="id_comment_text"></textarea>
+                </div>
+                    <div id="preview" class="tab-pane col-sm-12 form-control" role="tabpanel" aria-labelledby="preview-tab"></div>
+                <div class="row">
+                    <div class="col-sm-12 comment-submit">
+                        <input type="submit" id="post-submit" class="btn btn-success" value="{% trans "Post comment" %}">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+<script>
+    $(document).ready(function() {
+        marked.setOptions({
+            breaks: true,
+        });
+        $(".main-text").html(marked($(".main-text").html()));
+
+        $(".comment-area").each(function(index, element) {
+            $(element).html(marked($(element).html()));
+        });
+
+        $("#id_comment_text").on("keyup", function(e) {
+            marked.setOptions({
+                breaks: true,
+            });
+            $("#preview").html(marked($("#id_comment_text").val()));
+        });
+
+        $("#preview").height($("#id_comment_text").height());
+
+        $('.good-toggle').click(function(e) {
+            e.preventDefault();
+            const _that = $(this);
+            const is_good = _that.hasClass('good-button');
+            let form = $('#good_form');
+            form = form.serializeArray();
+            form.push({name: 'is_good', value: is_good});
+            $.ajax({
+                url: '{% url 'posts:good' username=object.create_user.username pk=object.pk %}',
+                type: 'POST',
+                data: form,
+            })
+            .done((data) => {
+                if (data['is_good']) {
+                    $('.check-button').removeClass('d-none');
+                    $('.check-button').show();
+                    $('.good-button').hide();
+                } else {
+                    $('.good-button').removeClass('d-none');
+                    $('.good-button').show();
+                    $('.check-button').hide();
+                }
+                $('.good-count').text(data['good_count']);
+            })
+            .fail((data) => {
+                console.log(data);
+            })
+        });
+
+        $('.stock-toggle').click(function(e) {
+            e.preventDefault();
+            const _that = $(this);
+            const is_stock = _that.hasClass('stock-button-close');
+            let form = $('#stock_form');
+            form = form.serializeArray();
+            form.push({name: 'is_stock', value: is_stock});
+            form.push({name: 'post_pk', value: '{{ object.pk }}'});
+            $.ajax({
+                url: '{% url 'accounts:stock' %}',
+                type: 'POST',
+                data: form,
+            })
+            .done((data) => {
+                if (data['is_stock']) {
+                    $('.stock-button-close').removeClass('d-none');
+                    $('.stock-button-close').show();
+                    $('.stock-button-open').hide();
+                } else {
+                    $('.stock-button-open').removeClass('d-none');
+                    $('.stock-button-open').show();
+                    $('.stock-button-close').hide();
+                }
+            })
+            .fail((data) => {
+                console.log(data);
+            })
+        });
+
+        $('.good-comment-toggle').click(function(e) {
+            e.preventDefault();
+            const _that = $(this);
+            const is_good = _that.hasClass('check-comment-button');
+            let form = _that.parent();
+            const form_obj = form;
+            form = form.serializeArray();
+            form.push({name: 'is_good', value: is_good});
+            $.ajax({
+                url: '{% url 'comments:good' username=object.create_user.username pk=object.pk %}',
+                type: 'POST',
+                data: form,
+            })
+            .done((data) => {
+                if (data['is_good']) {
+                    $(form_obj).children('.check-comment-button').removeClass('d-none');
+                    $(form_obj).children('.check-comment-button').show();
+                    $(form_obj).children('.good-comment-button').hide();
+                } else {
+                    $(form_obj).children('.good-comment-button').removeClass('d-none');
+                    $(form_obj).children('.good-comment-button').show();
+                    $(form_obj).children('.check-comment-button').hide();
+                }
+                $(form_obj).children('.good-comment-count').text(data['good_comment_count']);
+            })
+            .fail((data) => {
+                console.log(data);
+            })
+        });
+    });
+</script>
+{% endblock content %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Update article" %}{% endblock title %}
+
+{% block script %}
+    <script src="{% static 'js/marked.min.js' %}"></script>
+{% endblock script %}
+
+{% block content %}
+    <form method="POST" action="{% url 'posts:update' pk=form.id.value %}">
+        {% csrf_token %}
+        <div class="row form-group">
+            {{ form.title }}
+        </div>
+        <div class="row form-group">
+            {{ form.tag }}
+        </div>
+        <div class="row form-group">
+            {{ form.text }}
+            <div id="markdown" class="col-sm-6 form-control"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <input type="submit" id="post-submit" class="btn btn-success btn-lg" value="{% trans "Update article" %}">
+            </div>
+        </div>
+    </form>
+
+    <script>
+        $(document).ready(function() {
+            marked.setOptions({
+                breaks: true,
+            });
+            $("#markdown").html(marked($("#id_text").val()));
+            $("#id_text").on("keyup", function(e) {
+                $("#markdown").html(marked($("#id_text").val()));
+            });
+
+            $("#markdown").height($("#id_text").height());
+        });
+    </script>
+{% endblock content %}
+

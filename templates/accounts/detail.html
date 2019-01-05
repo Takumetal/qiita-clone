@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ user.username }}{% endblock title %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-sm-3 offset-sm-1">
+		<h3>{{ user.username }}</h3>
+        {% if not is_login_user %}
+            <form id="follow_form">
+                {% csrf_token %}
+                {% if user in request.user.profile.following.all %}
+                    <button class="user-follow-toggle user-follow-button btn btn-warning unfollow">{% trans "Unfollow user" %}</button>
+                    <button class="user-follow-toggle user-follow-button btn btn-success d-none follow">{% trans "Follow user" %}</button>
+                {% else %}
+                    <button class="user-follow-toggle user-follow-button btn btn-success follow">{% trans "Follow user" %}</button>
+                    <button class="user-follow-toggle user-follow-button btn btn-warning d-none unfollow">{% trans "Unfollow user" %}</button>
+                {% endif %}
+            </form>
+        {% endif %}
+		<hr>
+        {% if is_login_user %}
+		    <a href="{% url 'accounts:edit' username=user.username pk=user.id %}" class="btn btn-success">{% trans "Edit profile" %}</a>
+		    <hr>
+        {% endif %}
+		<p>{% trans "Follow tags" %}</p>
+            {% if user.profile.tag %}
+                {% for tag in user.profile.tag.all %}
+                    <a href="{% url 'tags:detail' tag=tag.tag %}" class="tag"><span class="badge badge-secondary">{{ tag.tag }}</span></a>
+                {% endfor %}
+            {% endif %}
+		<hr>
+		<p>{% trans "Follow users" %}</p>
+        {% if user.profile.following.all %}
+            {% for user in user.profile.following.all %}
+                <a href="{% url 'accounts:detail' username=user.username %}" class="text-body">{{ user.username }}</a>
+            {% endfor %}
+        {% endif %}
+		<hr>
+		<p>{{ user.username }}&nbsp;{% trans "Followers" %}</p>
+        {% if user.followed_by.all %}
+            {% for profile in user.followed_by.all %}
+                <a href="{% url 'accounts:detail' username=profile.user.username %}" class="text-body">{{ profile.user.username }}</a>
+            {% endfor %}
+        {% endif %}
+	</div>
+	<div class="col-sm-6">
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active text-body text-center" id="nav-article-tab" data-toggle="tab" href="#nav-article"
+                   role="tab" aria-controls="nav-article" aria-selected="true">{% trans "Article list" %}</a>
+                <a class="nav-item nav-link text-body text-center" id="nav-good-tab" data-toggle="tab" href="#nav-good"
+                   role="tab" aria-controls="nav-good" aria-selected="false">{% trans "Nice article" %}</a>
+            </div>
+        </nav>
+        <div class="tab-content mt-3" id="nav-tabContent">
+            <div class="tab-pane active" id="nav-article" role="tabpanel" aria-labelledby="nav-article-tab">
+                {% if posts %}
+                    {% get_current_language as LANGUAGE_CODE %}
+                    <ul class="post_list">
+                        {% for post in posts %}
+                            {% if not forloop.first %}<hr>{% endif %}
+                            {% if LANGUAGE_CODE != 'ja' %}
+                                <span><small>Posted&nbsp;at&nbsp;{{ post.create_date|date:"Y/m/d G:i" }}</small></span><br>
+                            {% else %}
+                                <span><small>{{ post.create_date|date:"Y/m/d G:i" }}&nbsp;{% trans "Posted." %}</small></span><br>
+                            {% endif %}
+                            <h3><strong><a class="text-body" href="{% url 'posts:detail' username=post.create_user.username pk=post.id %}">{{ post.title }}</a></strong></h3>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+            <div class="tab-pane" id="nav-good" role="tabpanel" aria-labelledby="nav-good-tab">
+                {% if good_article %}
+                    {% get_current_language as LANGUAGE_CODE %}
+                    <ul class="post_list">
+                        {% for post in good_article %}
+                            {% if not forloop.first %}<hr>{% endif %}
+                            {% if LANGUAGE_CODE != 'ja' %}
+                                <span><small>Posted&nbsp;at&nbsp;{{ post.create_date|date:"Y/m/d G:i" }}</small></span><br>
+                            {% else %}
+                                <span><small>{{ post.create_date|date:"Y/m/d G:i" }}&nbsp;{% trans "Posted." %}</small></span><br>
+                            {% endif %}
+                            <h3><strong><a class="text-body" href="{% url 'posts:detail' username=post.create_user.username pk=post.id %}">{{ post.title }}</a></strong></h3>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+	</div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('.user-follow-toggle').click(function(e) {
+            e.preventDefault();
+            const _that = $(this);
+            const is_follow = _that.hasClass('unfollow');
+            let form = $('#follow_form');
+            form = form.serializeArray();
+            form.push({name: 'is_follow', value: is_follow});
+            $.ajax({
+                url: '{% url 'accounts:follow' username=user.username %}',
+                type: 'POST',
+                data: form,
+            })
+            .done((data) => {
+                if (data['is_follow']) {
+                    $('.unfollow').removeClass('d-none');
+                    $('.unfollow').show();
+                    $('.follow').hide();
+                } else {
+                    $('.follow').removeClass('d-none');
+                    $('.follow').show();
+                    $('.unfollow').hide();
+                }
+            })
+            .fail((data) => {
+                console.log(data);
+            })
+        });
+    });
+</script>
+
+{% endblock content %}

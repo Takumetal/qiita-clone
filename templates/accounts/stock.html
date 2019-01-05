@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Stock list" %}{% endblock title %}
+
+{% block content %}
+    <h3 class="text-center">{% trans "Stock list" %}</h3>
+    {% if stock_list.stock %}
+        <ul class="post_list col-sm-8 offset-sm-2">
+            {% for post in stock_list.stock.all %}
+                <hr>
+                <h3><strong><a class="text-body" href="{% url 'posts:detail' username=post.create_user.username pk=post.id %}">{{ post.title }}</a></strong></h3>
+                <small class="text-muted">
+                        By&nbsp;<a class="text-muted" href="{% url 'accounts:detail' username=post.create_user.username %}">{{ post.create_user.username }}</a>
+                        |&nbsp;{{ post.create_date|date:"Y/m/d G:i" }}
+                    &nbsp;<i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i>&nbsp;{{ post.good.all|length }}&nbsp;
+
+                    <form class="stock_form">
+                        {% csrf_token %}
+                        <i class="fa fa-folder fa-lg stock-icon-close" aria-hidden="true"></i>
+                        <i class="fa fa-folder-open fa-lg stock-icon-open d-none" aria-hidden="true"></i>
+                        <input type="hidden" name="post_pk" value="{{ post.pk }}">
+                    </form>
+                </small>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <script>
+        $(document).ready(function() {
+            $('.stock_form').click(function(e) {
+                e.preventDefault();
+                const _that = $(this);
+                const is_stock = _that.hasClass('stock-icon-close');
+                let form = _that;
+                form = form.serializeArray();
+                form.push({name: 'is_stock', value: is_stock});
+                $.ajax({
+                    url: '{% url 'accounts:stock' %}',
+                    type: 'POST',
+                    data: form,
+                })
+                .done((data) => {
+                    if (data['is_stock']) {
+                        _that.find('.stock-icon-close').removeClass('d-none');
+                        _that.find('.stock-icon-close').show();
+                        _that.find('.stock-icon-open').hide();
+                    } else {
+                        _that.find('.stock-icon-open').removeClass('d-none');
+                        _that.find('.stock-icon-open').show();
+                        _that.find('.stock-icon-close').hide();
+                    }
+                })
+                .fail((data) => {
+                    console.log(data);
+                })
+            });
+        });
+    </script>
+{% endblock content %}

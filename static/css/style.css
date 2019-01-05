@@ -1,0 +1,151 @@
+/**** custom css ****/
+
+/* accounts/edit.html, posts/create.html, posts/update.html */
+#post-submit {
+    float: right;
+}
+
+/* accounts/signup.html */
+#signup-title {
+    margin-bottom: 5%;
+}
+#signup-area {
+    background-color: #EEEEEE;
+    margin-top: 3%;
+    padding-top: 5%;
+    padding-bottom: 3%;
+}
+
+/* accounts/stock.html */
+.stock_form {
+    display: inline-block;
+    margin-bottom: 0px;
+}
+.stock_form:hover {
+    cursor: pointer;
+}
+.stock-icon-close {
+    color: #28a745;
+}
+
+/* posts/detail.html */
+.border-display {
+    border: 1px solid #dcdcdc;
+}
+.article-header {
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+.good-button, .check-button, .stock-button-open, .stock-button-close {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+.good-button:hover, .check-button:hover {
+    color: #28a745;
+    background-color: transparent;
+    background-image: none;
+    border-color: #28a745;
+}
+.stock-button-open:hover, .stock-button-close:hover {
+    color: #17a2b8;
+    background-color: transparent;
+    background-image: none;
+    border-color: #17a2b8;
+}
+.good-count {
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+#delete-article {
+    margin-left: 20px;
+}
+#delete-form {
+    display: inline-block;
+}
+.input-comment {
+    margin-top: 50px;
+}
+.comment-row {
+    margin-top: 30px;
+}
+.comment-area {
+    padding: 20px;
+    margin-top: 30px;
+}
+.comment {
+    margin-top: 25px;
+}
+.comment-submit {
+    margin-top: 10px;
+}
+.good-comment-count {
+    margin-left: 3px;
+}
+.good-comment-toggle:hover {
+    cursor: pointer;
+}
+.fa-comment {
+    color: #6c757d !important;
+}
+
+/* posts/index.html */
+.post_index_list {
+    display: inline-block;
+}
+#user-ranking-area, #tag-ranking-area, #post-ranking-area {
+    display: inline-block;
+    border: 1px solid rgba(0,0,0,.1);
+}
+.ranking-header {
+    padding-top: 10px;
+}
+#tag-ranking-area, #post-ranking-area {
+    margin-top: 20px;
+}
+
+/* registration/login.html */
+.login-header {
+    margin-bottom: 5%;
+}
+#login-area {
+    background-color: #EEEEEE;
+    margin-top: 3%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+/* tags/tag_detail.html */
+.tag-toggle {
+    margin-top: 10px;
+}
+
+/* tags/tag_list.html */
+.tag {
+    margin: 10px;
+}
+
+/* base.html */
+.footer {
+    text-align: center;
+    background-color: #FFFFFF !important;
+}
+.fa-copyright {
+    padding-right: 5px;
+}
+
+/* navbar.html */
+.navbar_icon {
+    padding-right: 5px;
+}
+.navbar-brand, .nav-link, #post_button {
+    color: #FFFFFF;
+}
+.navbar-brand:hover, .nav-link:hover, #post_button:hover {
+    color: #a7b4b3;
+}
+nav div ul li {
+    margin-left: 20px;
+}
+.text-white {
+    color: #FFFFFF;
+}

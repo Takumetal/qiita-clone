@@ -1,0 +1,243 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-04 21:28+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: accounts/views.py:27
+msgid "Sign up is completed."
+msgstr "サインアップが完了しました。"
+
+#: posts/forms.py:12 posts/forms.py:13
+msgid "Title"
+msgstr "タイトル"
+
+#: posts/forms.py:14
+msgid "Text"
+msgstr "本文"
+
+#: posts/forms.py:15
+msgid "Enter content of article"
+msgstr "記事の本文を入力"
+
+#: posts/forms.py:16
+msgid "Tag"
+msgstr "タグ"
+
+#: posts/forms.py:17
+msgid "Enter up to 5 tags separated by spaces."
+msgstr "タグをスペース区切りで５つまで入力"
+
+#: posts/forms.py:26
+msgid "Up to five tags can be registered."
+msgstr "タグは最大５つまで登録できます。"
+
+#: posts/views.py:78
+msgid "You posted an article!"
+msgstr "記事を投稿しました！"
+
+#: posts/views.py:111
+#, python-brace-format
+msgid "{title} Updated post!"
+msgstr "{title} を更新しました。"
+
+#: posts/views.py:137
+#, python-brace-format
+msgid "{title} Deleted."
+msgstr "{title} を削除しました。"
+
+#: posts/views.py:166
+msgid "Posted a comment."
+msgstr "コメントを投稿しました。"
+
+#: posts/views.py:168
+msgid "Failed to post a comment."
+msgstr "コメントの投稿に失敗しました。"
+
+#: templates/accounts/detail.html:15 templates/accounts/detail.html:19
+msgid "Unfollow user"
+msgstr "フォローをやめる"
+
+#: templates/accounts/detail.html:16 templates/accounts/detail.html:18
+msgid "Follow user"
+msgstr "フォローする"
+
+#: templates/accounts/detail.html:25 templates/accounts/edit.html:4
+#: templates/accounts/edit.html:16
+msgid "Edit profile"
+msgstr "プロフィールを編集"
+
+#: templates/accounts/detail.html:28
+msgid "Follow tags"
+msgstr "フォローしているタグ"
+
+#: templates/accounts/detail.html:35
+msgid "Follow users"
+msgstr "フォローしているユーザ"
+
+#: templates/accounts/detail.html:42
+msgid "Followers"
+msgstr "のフォロワー"
+
+#: templates/accounts/detail.html:53
+msgid "Article list"
+msgstr "記事一覧"
+
+#: templates/accounts/detail.html:55
+msgid "Nice article"
+msgstr "いいねした記事"
+
+#: templates/accounts/detail.html:68 templates/accounts/detail.html:84
+#: templates/posts/detail.html:45
+msgid "Posted."
+msgstr "に投稿"
+
+#: templates/accounts/edit.html:13 templates/accounts/edit.html:14
+#: users/models.py:37
+msgid "Username"
+msgstr "ユーザ名"
+
+#: templates/accounts/signup.html:4
+msgid "Sign up"
+msgstr "サインアップ"
+
+#: templates/accounts/signup.html:42 templates/registration/login.html:4
+#: templates/registration/login.html:9 templates/registration/login.html:26
+msgid "Login"
+msgstr "ログイン"
+
+#: templates/accounts/stock.html:4 templates/accounts/stock.html:7
+#: templates/navbar.html:14
+msgid "Stock list"
+msgstr "ストック一覧"
+
+#: templates/navbar.html:17
+msgid "Post article"
+msgstr "記事を投稿"
+
+#: templates/navbar.html:21
+msgid "Menu"
+msgstr "メニュー"
+
+#: templates/navbar.html:23
+msgid "My page"
+msgstr "マイページ"
+
+#: templates/navbar.html:24 templates/tags/tag_list.html:4
+#: templates/tags/tag_list.html:10
+msgid "Tag list"
+msgstr "タグ一覧"
+
+#: templates/navbar.html:26
+msgid "Logout"
+msgstr "ログアウト"
+
+#: templates/posts/create.html:5
+msgid "Article creation"
+msgstr "記事を作成"
+
+#: templates/posts/create.html:25 templates/posts/index.html:43
+msgid "Post"
+msgstr "投稿"
+
+#: templates/posts/detail.html:45
+msgid "at"
+msgstr "が"
+
+#: templates/posts/detail.html:49 templates/posts/detail.html:57
+msgid "Delete article"
+msgstr "記事を削除"
+
+#: templates/posts/detail.html:58 templates/posts/detail.html:66
+msgid "Close"
+msgstr "閉じる"
+
+#: templates/posts/detail.html:63
+msgid "Delete this article."
+msgstr "この記事を削除する。"
+
+#: templates/posts/detail.html:67
+msgid "Delete"
+msgstr "削除"
+
+#: templates/posts/detail.html:73 templates/posts/update.html:5
+#: templates/posts/update.html:26
+msgid "Update article"
+msgstr "記事を更新"
+
+#: templates/posts/detail.html:101 templates/posts/detail.html:119
+msgid "Post comment"
+msgstr "コメントを投稿"
+
+#: templates/posts/detail.html:104
+msgid "Comment"
+msgstr "コメント"
+
+#: templates/posts/detail.html:107
+msgid "Preview"
+msgstr "プレビュー"
+
+#: templates/posts/detail.html:114
+msgid "Enter comment"
+msgstr "コメントを入力"
+
+#: templates/posts/index.html:4
+msgid "Home"
+msgstr "ホーム"
+
+#: templates/posts/index.html:21
+msgid "User ranking"
+msgstr "ユーザーランキング"
+
+#: templates/posts/index.html:29
+msgid "Follower"
+msgstr "フォロワー"
+
+#: templates/posts/index.html:35
+msgid "Tag ranking"
+msgstr "タグランキング"
+
+#: templates/posts/index.html:49
+msgid "Post ranking"
+msgstr "記事ランキング"
+
+#: templates/posts/index.html:57
+msgid "Good"
+msgstr "いいね"
+
+#: templates/registration/login.html:11
+msgid "Your username and password didn't match. Please try again."
+msgstr "ユーザ名かパスワードが異なります。再度試してください。"
+
+#: templates/tags/tag_detail.html:11
+msgid "Posts"
+msgstr "投稿"
+
+#: templates/tags/tag_detail.html:15 templates/tags/tag_detail.html:19
+msgid "Unfollow tag"
+msgstr "フォローをやめる"
+
+#: templates/tags/tag_detail.html:16 templates/tags/tag_detail.html:18
+msgid "Follow tag"
+msgstr "フォローする"
+
+#: users/forms.py:9 users/models.py:38
+msgid "Email address"
+msgstr "メールアドレス"
+
+#~ msgid "Your article"
+#~ msgstr "あなたの記事"

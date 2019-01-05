@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Sign up" %}{% endblock title %}
+
+{% block content %}
+
+	<div class="row text-center">
+		<div id="signup-area" class="col-sm-6 offset-sm-3">
+			<h2 id="signup-title">Sign up</h2>
+			{% if form.errors %}
+				{% for error in form.errors %}
+					<p class="text-danger">{{ error }}</p>
+				{% endfor %}
+			{% endif %}
+
+			<form method="POST" action="{% url 'signup' %}">
+			    {% csrf_token %}
+			    <div class="form-group">
+					<div class="col-sm-8 offset-sm-2">
+				    	<input type="text" class="form-control" id="username" name="username" placeholder="username" required>
+			    	</div>
+			    </div>
+			    <div class="form-group">
+					<div class="col-sm-8 offset-sm-2">
+				    	<input type="email" class="form-control" id="email" name="email" placeholder="email" required>
+			    	</div>
+			    </div>
+			    <div class="form-group">
+				    <div class="col-sm-8 offset-sm-2">
+				    	<input type="password" class="form-control" id="password1" name="password1" placeholder="password" required>
+				    </div>
+				</div>
+			    <div class="form-group">
+				    <div class="col-sm-8 offset-sm-2">
+				    	<input type="password" class="form-control" id="password2" name="password2" placeholder="password(confirmation)" required>
+				    </div>
+				</div>
+			    <input type="submit" class="btn btn-primary" value="Sign up">
+			    <input type="hidden" name="next" value="{{ next }}">
+			</form>
+			<p><a href="{% url 'login' %}">{% trans "Login" %}</a></p>
+
+			{# Assumes you setup the password_reset view in your URLconf #}
+			<!-- <p><a href="{% url 'password_reset' %}">Lost password?</a></p> -->
+		</div>
+	</div>
+w{% endblock %}

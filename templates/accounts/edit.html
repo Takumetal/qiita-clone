@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Edit profile" %}{% endblock title %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-sm-8 offset-sm-2">
+            <form method="POST" action="{% url 'accounts:edit' username=request.user.username pk=request.user.id %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_username">{% trans "Username" %}</label>
+                    <input type="text" class="form-control" id="id_username" name="username" value="{{ form.username.value }}" placeholder="{% trans "Username" %}">
+              </div>
+                <input type="submit" id="post-submit" class="btn btn-success btn-lg" value="{% trans "Edit profile" %}">
+            </form>
+        </div>
+    </div>
+{% endblock content %}

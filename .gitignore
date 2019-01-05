@@ -1,0 +1,7 @@
+.idea
+*.pyc
+*.sqlite3
+*.mo
+*/migrations/00*.py
+key.txt
+

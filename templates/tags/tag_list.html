@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Tag list" %}{% endblock title %}
+
+{% block content %}
+
+{% if tag_list %}
+	<ul class="post_list col-sm-8 offset-sm-2">
+        <h2>{% trans "Tag list" %}</h2>
+        <hr>
+		{% for value in tag_count_list %}
+            <a href="{% url 'tags:detail' tag=value.0 %}" class="btn btn-info tag">{{ value.0 }} <span class="badge badge-secondary">{{ value.1 }}</span><br></a>
+        {% endfor %}
+	</ul>
+{% endif %}
+{% endblock content %}

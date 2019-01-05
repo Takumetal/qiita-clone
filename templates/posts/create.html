@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Article creation" %}{% endblock title %}
+{% block script %}
+    <script src="{% static 'js/marked.min.js' %}"></script>
+{% endblock script %}
+
+{% block content %}
+    <form method="POST" action="{% url 'posts:create' %}">
+        {% csrf_token %}
+        <div class="row form-group">
+            {{ form.title }}
+        </div>
+        <div class="row form-group">
+            {{ form.tag }}
+        </div>
+        <div class="row form-group">
+            {{ form.text }}
+            <div id="markdown" class="col-sm-6 form-control"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <input type="submit" id="post-submit" class="btn btn-success btn-lg" value="{% trans "Post" %}">
+            </div>
+        </div>
+    </form>
+
+    <script>
+        $(document).ready(function() {
+            $("#id_text").on("keyup", function(e) {
+                marked.setOptions({
+                    breaks: true,
+                });
+                $("#markdown").html(marked($("#id_text").val()));
+            });
+
+            $("#markdown").height($("#id_text").height());
+        });
+    </script>
+{% endblock content %}
+
