@@ -25,6 +25,9 @@ class CommentManager(models.Manager):
             comment.is_good = True if user in comment.good.all() else False
         return comments
 
+    def get_comments_for_specific_user(self, user):
+        return Comment.objects.filter(post_user=user).order_by('-create_date')
+
     def comment_good_toggle(self, user, comment_obj):
         if user in comment_obj.good.all():
             is_good = False

@@ -4,4 +4,5 @@
 *.mo
 */migrations/00*.py
 key.txt
+local_settings.py
 

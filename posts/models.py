@@ -28,7 +28,8 @@ class PostManager(models.Manager):
         return is_good
 
     def post_ranking(self):
-        return Post.objects.all().order_by('-good')[:10]
+        return Post.objects.all().annotate(
+            good_counts=models.Count('good')).order_by('-good_counts')[:10]
 
 
 class Post(models.Model):

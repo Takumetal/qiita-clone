@@ -7,6 +7,7 @@ from django.views.generic.edit import FormView, UpdateView
 from django.utils.translation import gettext_lazy as _
 
 from accounts.models import UserProfile
+from comments.models import Comment
 from users.models import User
 from posts.models import Post
 
@@ -47,6 +48,7 @@ class UserDetailView(DetailView):
         login_user = get_object_or_404(User, username=self.request.user.username)
         context['is_login_user'] = True if target_user.email == login_user.email else False
         context['good_article'] = Post.objects.get_good_article_for_specific_user(self.request.user)
+        context['comments'] = Comment.objects.get_comments_for_specific_user(self.request.user)
 
         return context
 
@@ -72,7 +74,13 @@ class StockListView(ListView):
 
     def get_queryset(self, *args, **kwargs):
         qs = UserProfile.objects.get(user=self.request.user)
-        return qs
+        stock_list = []
+        if qs.stock:
+            for stock in qs.stock.all():
+                if stock.tag:
+                    stock.tag_list = stock.tag.split(' ')
+                stock_list.append(stock)
+        return stock_list
 
     def get_context_data(self, *args, **kwargs):
         context = super(StockListView, self).get_context_data(*args, **kwargs)
@@ -84,9 +92,7 @@ class StockListView(ListView):
 
     def post(self, request, *args, **kwargs):
         post_pk = request.POST['post_pk']
-        is_stock = True if request.POST['is_stock'] == 'true' else False
         post = Post.objects.get(pk=post_pk)
-        # user_profile = UserProfile.objects.get(user=request.user)
         stock_result = UserProfile.objects.stock_toggle(request.user, post)
 
         return JsonResponse({'is_stock': stock_result})
@@ -96,7 +102,6 @@ class UserFollowView(View):
 
     def post(self, request, *args, **kwargs):
         username = self.kwargs.get('username')
-        is_follow = True if request.POST['is_follow'] == 'true' else False
         target_user = User.objects.get(username=username)
         user_follow_result = UserProfile.objects.user_follow_toggle(request.user, target_user)
 

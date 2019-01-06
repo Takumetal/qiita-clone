@@ -41,9 +41,9 @@
             {% get_current_language as LANGUAGE_CODE %}
             <div class="article-header">
                 {% if LANGUAGE_CODE != 'ja' %}
-                    Posted&nbsp;by&nbsp;<a class="text-body" href="{% url 'accounts:detail' username=object.create_user.username %}">{{ object.create_user.username }}</a>&nbsp;at&nbsp;{{ object.create_date|date:"Y/m/d G:i" }}
+                    Posted&nbsp;by&nbsp;<a class="text-link" href="{% url 'accounts:detail' username=object.create_user.username %}">{{ object.create_user.username }}</a>&nbsp;at&nbsp;{{ object.create_date|date:"Y/m/d G:i" }}
                 {% else %}
-                    <a class="text-body" href="{% url 'accounts:detail' username=object.create_user.username %}">{{ object.create_user.username }}&nbsp;</a>{% trans "at" %}&nbsp;{{ object.create_date|date:"Y/m/d G:i" }}&nbsp;{% trans "Posted." %}
+                    <a class="text-link" href="{% url 'accounts:detail' username=object.create_user.username %}">{{ object.create_user.username }}&nbsp;</a>{% trans "at" %}&nbsp;{{ object.create_date|date:"Y/m/d G:i" }}&nbsp;{% trans "Posted." %}
                 {% endif %}
                 {% if is_login_user %}
                     <button type="button" id="delete-article" class="btn btn-outline-danger float-right" data-toggle="modal" data-target="#delete">
@@ -89,7 +89,7 @@
         <div class="row comment-row">
             {% for comment in comments %}
                 <div class="col-sm-11 comment">
-                    <a href="{% url 'accounts:detail' username=comment.post_user.username %}" class="text-body">{{ comment.post_user.username }}</a>
+                    <a href="{% url 'accounts:detail' username=comment.post_user.username %}" class="text-link">{{ comment.post_user.username }}</a>
                     <span class="float-right text-muted small">{{ comment.create_date|date:"Y/m/d G:i" }}</span><br>
                     <form class="good_comment_form" action="{% url 'comments:good' username=comment.post_user.username pk=comment.post.pk pk=comment.pk %}">
                         {% csrf_token %}

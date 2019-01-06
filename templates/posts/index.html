@@ -9,9 +9,9 @@
             {% if post_list %}
                 {% for post in post_list %}
                     <hr>
-                    <h3><strong><a class="text-body" href="{% url 'posts:detail' username=post.create_user.username pk=post.id %}">{{ post.title }}</a></strong></h3>
+                    <h4><strong><a class="text-link" href="{% url 'posts:detail' username=post.create_user.username pk=post.id %}">{{ post.title }}</a></strong></h4>
                     <small class="text-muted">
-                        By&nbsp;<a class="text-muted" href="{% url 'accounts:detail' username=post.create_user.username %}">{{ post.create_user.username }}</a>
+                        By&nbsp;<a class="text-link" href="{% url 'accounts:detail' username=post.create_user.username %}">{{ post.create_user.username }}</a>
                         |&nbsp;{{ post.create_date|date:"Y/m/d G:i" }}
                     &nbsp;<i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i>&nbsp;{{ post.good.all|length }}</small>
                 {% endfor %}
@@ -23,7 +23,7 @@
                 <hr>
                 <div class="row">
                     <div class="col-sm-8">
-                        <a class="text-body" href="{% url 'accounts:detail' username=user.username %}">{{ user.username }}</a>
+                        <a class="text-link" href="{% url 'accounts:detail' username=user.username %}">{{ user.username }}</a>
                     </div>
                     <div class="col-sm-4 text-center">
                         <small class="text-muted float-right">{{ user.followed_by.all|length }}<br>{% trans "Follower" %}</small>
@@ -37,7 +37,7 @@
                 <hr>
                 <div class="row">
                     <div class="col-sm-8">
-                        <a class="text-body" href="{% url 'tags:detail' tag=key %}">{{ key }}</a>
+                        <a class="text-link" href="{% url 'tags:detail' tag=key %}">{{ key }}</a>
                     </div>
                     <div class="col-sm-4 text-center">
                         <small class="text-muted float-right">{{ value }}&nbsp;{% trans "Post" %}</small>
@@ -51,7 +51,7 @@
                 <hr>
                 <div class="row">
                     <div class="col-sm-8">
-                        <a class="text-body" href="{% url 'posts:detail' username=post.create_user.username pk=post.pk %}">{{ post.title }}</a>
+                        <a class="text-link" href="{% url 'posts:detail' username=post.create_user.username pk=post.pk %}">{{ post.title }}</a>
                     </div>
                     <div class="col-sm-4 text-center">
                         <small class="text-muted float-right">{{ post.good.all|length }}<br>{% trans "Good" %}</small>

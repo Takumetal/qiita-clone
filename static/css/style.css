@@ -1,5 +1,9 @@
 /**** custom css ****/
 
+.text-link {
+    color: #337ab7;
+}
+
 /* accounts/edit.html, posts/create.html, posts/update.html */
 #post-submit {
     float: right;
@@ -20,12 +24,18 @@
 .stock_form {
     display: inline-block;
     margin-bottom: 0px;
+    margin-right: 10px;
 }
 .stock_form:hover {
     cursor: pointer;
 }
 .stock-icon-close {
     color: #28a745;
+}
+
+/* accounts/detail.html */
+.comment-text {
+    font-size: 0.9em;
 }
 
 /* posts/detail.html */

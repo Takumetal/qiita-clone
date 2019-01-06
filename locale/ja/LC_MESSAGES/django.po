@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-04 21:28+0900\n"
+"POT-Creation-Date: 2019-01-06 15:52+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,93 +18,101 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: accounts/views.py:27
+#: accounts/views.py:28
 msgid "Sign up is completed."
 msgstr "サインアップが完了しました。"
 
-#: posts/forms.py:12 posts/forms.py:13
+#: comments/views.py:22
+msgid "Posted a comment."
+msgstr "コメントを投稿しました。"
+
+#: comments/views.py:24
+msgid "Failed to post a comment."
+msgstr "コメントの投稿に失敗しました。"
+
+#: posts/forms.py:10 posts/forms.py:11
 msgid "Title"
 msgstr "タイトル"
 
-#: posts/forms.py:14
+#: posts/forms.py:12
 msgid "Text"
 msgstr "本文"
 
-#: posts/forms.py:15
+#: posts/forms.py:13
 msgid "Enter content of article"
 msgstr "記事の本文を入力"
 
-#: posts/forms.py:16
+#: posts/forms.py:14
 msgid "Tag"
 msgstr "タグ"
 
-#: posts/forms.py:17
+#: posts/forms.py:15
 msgid "Enter up to 5 tags separated by spaces."
 msgstr "タグをスペース区切りで５つまで入力"
 
-#: posts/forms.py:26
+#: posts/forms.py:24
 msgid "Up to five tags can be registered."
 msgstr "タグは最大５つまで登録できます。"
 
-#: posts/views.py:78
+#: posts/views.py:74
 msgid "You posted an article!"
 msgstr "記事を投稿しました！"
 
-#: posts/views.py:111
+#: posts/views.py:100
 #, python-brace-format
 msgid "{title} Updated post!"
 msgstr "{title} を更新しました。"
 
-#: posts/views.py:137
+#: posts/views.py:113
 #, python-brace-format
 msgid "{title} Deleted."
 msgstr "{title} を削除しました。"
 
-#: posts/views.py:166
-msgid "Posted a comment."
-msgstr "コメントを投稿しました。"
-
-#: posts/views.py:168
-msgid "Failed to post a comment."
-msgstr "コメントの投稿に失敗しました。"
-
-#: templates/accounts/detail.html:15 templates/accounts/detail.html:19
+#: templates/accounts/detail.html:20 templates/accounts/detail.html:24
 msgid "Unfollow user"
 msgstr "フォローをやめる"
 
-#: templates/accounts/detail.html:16 templates/accounts/detail.html:18
+#: templates/accounts/detail.html:21 templates/accounts/detail.html:23
 msgid "Follow user"
 msgstr "フォローする"
 
-#: templates/accounts/detail.html:25 templates/accounts/edit.html:4
+#: templates/accounts/detail.html:30 templates/accounts/edit.html:4
 #: templates/accounts/edit.html:16
 msgid "Edit profile"
 msgstr "プロフィールを編集"
 
-#: templates/accounts/detail.html:28
+#: templates/accounts/detail.html:33
 msgid "Follow tags"
 msgstr "フォローしているタグ"
 
-#: templates/accounts/detail.html:35
+#: templates/accounts/detail.html:40
 msgid "Follow users"
 msgstr "フォローしているユーザ"
 
-#: templates/accounts/detail.html:42
+#: templates/accounts/detail.html:47
 msgid "Followers"
 msgstr "のフォロワー"
 
-#: templates/accounts/detail.html:53
+#: templates/accounts/detail.html:58
 msgid "Article list"
 msgstr "記事一覧"
 
-#: templates/accounts/detail.html:55
+#: templates/accounts/detail.html:60
 msgid "Nice article"
 msgstr "いいねした記事"
 
-#: templates/accounts/detail.html:68 templates/accounts/detail.html:84
-#: templates/posts/detail.html:45
+#: templates/accounts/detail.html:75 templates/accounts/detail.html:91
+#: templates/accounts/detail.html:107 templates/posts/detail.html:46
 msgid "Posted."
 msgstr "に投稿"
+
+#: templates/accounts/detail.html:113
+msgid "article"
+msgstr "の記事"
+
+#: templates/accounts/detail.html:117
+msgid "commented"
+msgstr "にコメント"
 
 #: templates/accounts/edit.html:13 templates/accounts/edit.html:14
 #: users/models.py:37
@@ -120,14 +128,14 @@ msgstr "サインアップ"
 msgid "Login"
 msgstr "ログイン"
 
-#: templates/accounts/stock.html:4 templates/accounts/stock.html:7
+#: templates/accounts/stock.html:4 templates/accounts/stock.html:8
 #: templates/navbar.html:14
 msgid "Stock list"
 msgstr "ストック一覧"
 
 #: templates/navbar.html:17
 msgid "Post article"
-msgstr "記事を投稿"
+msgstr "記事を投稿する"
 
 #: templates/navbar.html:21
 msgid "Menu"
@@ -154,44 +162,50 @@ msgstr "記事を作成"
 msgid "Post"
 msgstr "投稿"
 
-#: templates/posts/detail.html:45
+#: templates/posts/detail.html:46
 msgid "at"
 msgstr "が"
 
-#: templates/posts/detail.html:49 templates/posts/detail.html:57
+#: templates/posts/detail.html:50 templates/posts/detail.html:58
 msgid "Delete article"
 msgstr "記事を削除"
 
-#: templates/posts/detail.html:58 templates/posts/detail.html:66
+#: templates/posts/detail.html:59 templates/posts/detail.html:67
 msgid "Close"
 msgstr "閉じる"
 
-#: templates/posts/detail.html:63
+#: templates/posts/detail.html:64
 msgid "Delete this article."
 msgstr "この記事を削除する。"
 
-#: templates/posts/detail.html:67
+#: templates/posts/detail.html:68
 msgid "Delete"
 msgstr "削除"
 
-#: templates/posts/detail.html:73 templates/posts/update.html:5
+#: templates/posts/detail.html:74 templates/posts/update.html:5
 #: templates/posts/update.html:26
 msgid "Update article"
 msgstr "記事を更新"
 
-#: templates/posts/detail.html:101 templates/posts/detail.html:119
+#: templates/posts/detail.html:99 templates/posts/detail.html:100
+#: templates/posts/detail.html:102 templates/posts/detail.html:103
+#: templates/posts/index.html:57
+msgid "Good"
+msgstr "いいね"
+
+#: templates/posts/detail.html:112 templates/posts/detail.html:130
 msgid "Post comment"
 msgstr "コメントを投稿"
 
-#: templates/posts/detail.html:104
+#: templates/posts/detail.html:115
 msgid "Comment"
 msgstr "コメント"
 
-#: templates/posts/detail.html:107
+#: templates/posts/detail.html:118
 msgid "Preview"
 msgstr "プレビュー"
 
-#: templates/posts/detail.html:114
+#: templates/posts/detail.html:125
 msgid "Enter comment"
 msgstr "コメントを入力"
 
@@ -214,10 +228,6 @@ msgstr "タグランキング"
 #: templates/posts/index.html:49
 msgid "Post ranking"
 msgstr "記事ランキング"
-
-#: templates/posts/index.html:57
-msgid "Good"
-msgstr "いいね"
 
 #: templates/registration/login.html:11
 msgid "Your username and password didn't match. Please try again."

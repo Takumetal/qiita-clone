@@ -14,8 +14,9 @@ class CommentView(View):
     def post(self, request, *args, **kwargs):
         username = self.kwargs.get('username')
         pk = self.kwargs.get('pk')
+        commented_username = request.user.username
         text = request.POST.get('text', None)
-        result = Comment.objects.create_comment(username, pk, text)
+        result = Comment.objects.create_comment(commented_username, pk, text)
 
         if request:
             messages.success(request, _('Posted a comment.'))

@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load static %}
+
+{% block script %}
+    <script src="{% static 'js/marked.min.js' %}"></script>
+{% endblock script %}
 
 {% block title %}{{ user.username }}{% endblock title %}
 
@@ -35,14 +40,14 @@
 		<p>{% trans "Follow users" %}</p>
         {% if user.profile.following.all %}
             {% for user in user.profile.following.all %}
-                <a href="{% url 'accounts:detail' username=user.username %}" class="text-body">{{ user.username }}</a>
+                <a href="{% url 'accounts:detail' username=user.username %}" class="text-link">{{ user.username }}</a>
             {% endfor %}
         {% endif %}
 		<hr>
 		<p>{{ user.username }}&nbsp;{% trans "Followers" %}</p>
         {% if user.followed_by.all %}
             {% for profile in user.followed_by.all %}
-                <a href="{% url 'accounts:detail' username=profile.user.username %}" class="text-body">{{ profile.user.username }}</a>
+                <a href="{% url 'accounts:detail' username=profile.user.username %}" class="text-link">{{ profile.user.username }}</a>
             {% endfor %}
         {% endif %}
 	</div>
@@ -53,6 +58,8 @@
                    role="tab" aria-controls="nav-article" aria-selected="true">{% trans "Article list" %}</a>
                 <a class="nav-item nav-link text-body text-center" id="nav-good-tab" data-toggle="tab" href="#nav-good"
                    role="tab" aria-controls="nav-good" aria-selected="false">{% trans "Nice article" %}</a>
+                <a class="nav-item nav-link text-body text-center" id="nav-comment-tab" data-toggle="tab" href="#nav-comment"
+                   role="tab" aria-controls="nav-comment" aria-selected="false">{% trans "Comment" %}</a>
             </div>
         </nav>
         <div class="tab-content mt-3" id="nav-tabContent">
@@ -67,7 +74,7 @@
                             {% else %}
                                 <span><small>{{ post.create_date|date:"Y/m/d G:i" }}&nbsp;{% trans "Posted." %}</small></span><br>
                             {% endif %}
-                            <h3><strong><a class="text-body" href="{% url 'posts:detail' username=post.create_user.username pk=post.id %}">{{ post.title }}</a></strong></h3>
+                            <h4><strong><a class="text-link" href="{% url 'posts:detail' username=post.create_user.username pk=post.id %}">{{ post.title }}</a></strong></h4>
                         {% endfor %}
                     </ul>
                 {% endif %}
@@ -83,7 +90,33 @@
                             {% else %}
                                 <span><small>{{ post.create_date|date:"Y/m/d G:i" }}&nbsp;{% trans "Posted." %}</small></span><br>
                             {% endif %}
-                            <h3><strong><a class="text-body" href="{% url 'posts:detail' username=post.create_user.username pk=post.id %}">{{ post.title }}</a></strong></h3>
+                            <h4><strong><a class="text-link" href="{% url 'posts:detail' username=post.create_user.username pk=post.id %}">{{ post.title }}</a></strong></h4>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+            <div class="tab-pane" id="nav-comment" role="tabpanel" aria-labelledby="nav-comment-tab">
+                {% if comments %}
+                    {% get_current_language as LANGUAGE_CODE %}
+                    <ul class="post_list">
+                        {% for comment in comments %}
+                            {% if not forloop.first %}<hr>{% endif %}
+                            {% if LANGUAGE_CODE != 'ja' %}
+                                <span><small>Posted&nbsp;at&nbsp;{{ comment.create_date|date:"Y/m/d G:i" }}</small></span><br>
+                            {% else %}
+                                <span><small>{{ comment.create_date|date:"Y/m/d G:i" }}&nbsp;{% trans "Posted." %}</small></span><br>
+                            {% endif %}
+                            <span class="text-body small">
+                                <a class="text-link"
+                                   href="{% url 'accounts:detail' username=comment.post.create_user.username %}">
+                                    {{ comment.post.create_user.username }}</a>
+                                <span class="text-muted">&nbsp;{% trans "article" %}&nbsp;</span>
+                                <a class="text-link"
+                                   href="{% url 'posts:detail' username=comment.post.create_user.username pk=comment.post.pk %}">
+                                    {{ comment.post.title }}</a>
+                                <span class="text-muted">&nbsp;{% trans "commented" %}</span>
+                            </span><br>
+                            <div class="comment-text text-truncate">{{ comment.text }}</div>
                         {% endfor %}
                     </ul>
                 {% endif %}
@@ -94,6 +127,11 @@
 
 <script>
     $(document).ready(function() {
+
+        $(".comment-text").each(function(index, element) {
+            $(element).html(marked($(element).html()));
+        });
+
         $('.user-follow-toggle').click(function(e) {
             e.preventDefault();
             const _that = $(this);
