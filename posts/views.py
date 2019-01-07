@@ -21,7 +21,7 @@ class IndexView(LoginRequiredMixin, ListView):
     template_name = 'posts/index.html'
 
     def get_queryset(self, *args, **kwargs):
-        qs = Post.objects.all().order_by('-create_date')
+        qs = Post.objects.all().order_by('-create_date')[:10]
         return qs
 
     def get_context_data(self, *args, **kwargs):
