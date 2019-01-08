@@ -97,16 +97,24 @@ class StockListView(ListView):
     def get_queryset(self, *args, **kwargs):
         qs = UserProfile.objects.get(user=self.request.user)
         stock_list = []
+        tag_count_dict = {}
         if qs.stock:
             for stock in qs.stock.all():
                 if stock.tag:
                     stock.tag_list = stock.tag.split(' ')
+                    for tag in stock.tag_list:
+                        if tag not in tag_count_dict.keys():
+                            tag_count_dict[tag] = 1
+                        else:
+                            tag_count_dict[tag] += 1
                 stock_list.append(stock)
-        return stock_list
+        return stock_list, tag_count_dict
 
     def get_context_data(self, *args, **kwargs):
         context = super(StockListView, self).get_context_data(*args, **kwargs)
-        context['stock_list'] = self.get_queryset()
+        stock_list, tag_count_dict = self.get_queryset()
+        context['stock_list'] = stock_list
+        context['tag_count_dict'] = dict(sorted(tag_count_dict.items(), key=lambda x: x[1], reverse=True))
         return context
 
     def get(self, request, *args, **kwargs):

@@ -84,6 +84,8 @@
 }
 .comment {
     margin-top: 25px;
+    border: 1px solid rgba(0,0,0,.1);
+    padding: 10px;
 }
 .comment-submit {
     margin-top: 10px;
@@ -127,6 +129,10 @@
 /* tags/tag_detail.html */
 .tag-toggle {
     margin-top: 10px;
+}
+#tag-horizontal-border {
+	border-right: 1px solid rgba(0,0,0,.1);
+	padding-right: 20px;
 }
 
 /* tags/tag_list.html */

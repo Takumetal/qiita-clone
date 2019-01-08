@@ -7,9 +7,11 @@
 
 <div class="row">
     <div class="col-sm-2">
-        <h2>{{ target_tag.tag }}</h2>
-        <span>{{ post_list|length }} {% trans "Posts" %}</span><br>
-        <form id="tag_form">
+        <h2 class="text-center">{{ target_tag.tag }}</h2>
+        <hr>
+        <div class="text-center">{{ post_list|length }}&nbsp;{% trans "Posts" %}</div><br>
+        <div class="text-center">{{ target_tag.followed_tag.all|length }}&nbsp;{% trans "Followers" %}</div><br>
+        <form id="tag_form" class="text-center">
             {% csrf_token %}
             {% if target_tag in request.user.profile.tag.all %}
                 <button class="tag-toggle tag-button btn btn-warning unfollow">{% trans "Unfollow tag" %}</button>

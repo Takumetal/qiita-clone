@@ -80,11 +80,27 @@
   }
 },
 {
+  "model": "sessions.session",
+  "pk": "7cjh0nknol3ngrtqff3oisbmqvbsar8t",
+  "fields": {
+    "session_data": "ZjBmNDM2YTE4YWRmOWRkNzAzOTllZjMwMzI2M2FiYzgxZTg2OWI5Nzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI5NGI3MjYwNmQzMzRjMjI2NDIyNzkyMDAxMjRlNzBjODAxMGNhMjU4In0=",
+    "expire_date": "2019-01-22T06:09:39.055Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "qj2r49uygh20vhab4qi2ef6x9gbp93tn",
+  "fields": {
+    "session_data": "NTFmNzgwM2JiMzUwNWE4N2QxNDgyNTk1MWZiMDIwNGRkMjBlZTQyNDp7Il9hdXRoX3VzZXJfaWQiOiI0IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJiY2JkOTZjM2M3MGU4NjZiMDc1ZTMwYTIzODViYzczOWRhZDAzMWFkIn0=",
+    "expire_date": "2019-01-22T06:03:10.318Z"
+  }
+},
+{
   "model": "users.user",
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$120000$dRE9HOqnsbVS$Dmcwl+wpHiDViQcIY0nOYpBWNoVJEnRoMCcwLQqQMEY=",
-    "last_login": "2019-01-08T02:15:01.936Z",
+    "last_login": "2019-01-08T06:09:39.044Z",
     "username": "administrator",
     "email": "administrator@qiitaclone.com",
     "is_active": true,
@@ -98,7 +114,7 @@
   "pk": 2,
   "fields": {
     "password": "pbkdf2_sha256$120000$PI0SHArVMKXx$YL8jOhAs3gAmVh+Lkj3mZeRFXe9aXHzEgK8hukrNwJk=",
-    "last_login": "2019-01-08T02:14:45.216Z",
+    "last_login": "2019-01-08T02:27:54.488Z",
     "username": "user1",
     "email": "user1@qiitaclone.com",
     "is_active": true,
@@ -126,7 +142,7 @@
   "pk": 4,
   "fields": {
     "password": "pbkdf2_sha256$120000$w7AZGJyaRgOZ$9aHddZ0btVnW6OrcEX8KJ7vA66oNYB9PIgnXmrN9U+w=",
-    "last_login": null,
+    "last_login": "2019-01-08T06:03:10.306Z",
     "username": "user3",
     "email": "user3@qiitaclone.com",
     "is_active": true,
@@ -173,7 +189,10 @@
     "create_user": 1,
     "create_date": "2019-01-08T02:18:16.399Z",
     "update_date": "2019-01-08T02:18:16.399Z",
-    "good": []
+    "good": [
+      2,
+      4
+    ]
   }
 },
 {
@@ -186,7 +205,24 @@
     "create_user": 1,
     "create_date": "2019-01-08T02:21:04.926Z",
     "update_date": "2019-01-08T02:21:04.926Z",
-    "good": []
+    "good": [
+      4
+    ]
+  }
+},
+{
+  "model": "posts.post",
+  "pk": 3,
+  "fields": {
+    "title": "Docker\u3067Django\u3092\u52d5\u304b\u305d\u3046\uff01",
+    "text": "###### \u3053\u306e\u8a18\u4e8b\u3067\u306f\u3001Docker\u3067Django\u3092\u52d5\u4f5c\u3055\u305b\u308b\u65b9\u6cd5\u3092\u7d39\u4ecb\u3057\u307e\u3059\u3002\r\n\r\n\r\n***\r\n\r\n**\u76ee\u6b21**\r\n1. Docker\u3092\u30a4\u30f3\u30b9\u30c8\u30fc\u30eb\r\n2. Docker\u30a4\u30e1\u30fc\u30b8\u306e\u4f5c\u6210\r\n3. Django\u30a2\u30d7\u30ea\u30b1\u30fc\u30b7\u30e7\u30f3\u306e\u4f5c\u6210\r\n\r\n***\r\n\r\n**1. Docker\u3092\u30a4\u30f3\u30b9\u30c8\u30fc\u30eb**\r\n\r\n\u307e\u305a\u3001Docker\u3092\u304a\u4f7f\u3044\u306ePC\u306b\u30a4\u30f3\u30b9\u30c8\u30fc\u30eb\u3057\u3066\u304f\u3060\u3055\u3044\u3002\r\n\u30fb\r\n\u30fb\r\n\u30fb\r\n\u30fb\r\n\u30fb\r\n\u30fb\r\n\u30fb",
+    "tag": "Docker Django Python",
+    "create_user": 4,
+    "create_date": "2019-01-08T07:25:13.881Z",
+    "update_date": "2019-01-08T07:25:13.881Z",
+    "good": [
+      4
+    ]
   }
 },
 {
@@ -214,13 +250,58 @@
   }
 },
 {
+  "model": "tags.tag",
+  "pk": 4,
+  "fields": {
+    "tag": "Docker",
+    "create_date": "2019-01-08T07:25:13.852Z"
+  }
+},
+{
+  "model": "tags.tag",
+  "pk": 5,
+  "fields": {
+    "tag": "Django",
+    "create_date": "2019-01-08T07:25:13.866Z"
+  }
+},
+{
+  "model": "comments.comment",
+  "pk": 1,
+  "fields": {
+    "text": "\u3053\u3093\u306b\u3061\u306f\u3001\u306f\u3058\u3081\u307e\u3057\u3066\u3002\r\n\r\n\u3053\u306e\u8a18\u4e8b\u306f\u3068\u3066\u3082\u53c2\u8003\u306b\u306a\u308a\u307e\u3057\u305f\u3002",
+    "post": 1,
+    "post_user": 2,
+    "create_date": "2019-01-08T02:29:18.194Z",
+    "update_date": "2019-01-08T02:29:18.195Z",
+    "good": []
+  }
+},
+{
+  "model": "comments.comment",
+  "pk": 2,
+  "fields": {
+    "text": "@user1\u3055\u3093\r\n\r\n\u30b3\u30e1\u30f3\u30c8\u3042\u308a\u304c\u3068\u3046\u3054\u3056\u3044\u307e\u3059\u3002\r\n\r\n\u307e\u305f\u826f\u3044\u8a18\u4e8b\u304c\u66f8\u3051\u308b\u3088\u3046\u306b\u9811\u5f35\u308a\u307e\u3059\u3002",
+    "post": 1,
+    "post_user": 1,
+    "create_date": "2019-01-08T06:02:30.307Z",
+    "update_date": "2019-01-08T06:02:30.307Z",
+    "good": []
+  }
+},
+{
   "model": "accounts.userprofile",
   "pk": 1,
   "fields": {
     "user": 1,
     "following": [],
-    "stock": [],
-    "tag": []
+    "stock": [
+      1,
+      2
+    ],
+    "tag": [
+      1
+    ]
   }
 },
 {
@@ -228,9 +309,15 @@
   "pk": 2,
   "fields": {
     "user": 2,
-    "following": [],
-    "stock": [],
-    "tag": []
+    "following": [
+      1
+    ],
+    "stock": [
+      1
+    ],
+    "tag": [
+      1
+    ]
   }
 },
 {
@@ -248,9 +335,18 @@
   "pk": 4,
   "fields": {
     "user": 4,
-    "following": [],
-    "stock": [],
-    "tag": []
+    "following": [
+      1,
+      5
+    ],
+    "stock": [
+      1,
+      2,
+      3
+    ],
+    "tag": [
+      1
+    ]
   }
 },
 {
