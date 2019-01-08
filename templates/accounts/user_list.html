@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans "User list" %}{% endblock title %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-sm-8 offset-sm-2">
+		<h4 class="text-center">{% trans "User list" %}</h4>
+		<hr>
+		{% for user in user_list %}
+			<a href="{% url 'accounts:detail' username=user.username %}">{{ user.username }}</a>
+			<hr>
+		{% endfor %}
+
+
+		<ul class="pagination justify-content-center">
+        		{% if user_list.has_previous %}
+            		<li class="page-item"><a href="?page=1" class="page-link">&laquo;&nbsp;{% trans "First" %}</a></li>
+            		<li class="page-item"><a href="?page={{ user_list.previous_page_number }}" class="page-link">{% trans "Previous" %}</a></li>
+				{% else %}
+				    <li class="page-item disabled"><a href="#" class="page-link">&laquo;&nbsp;{% trans "First" %}</a></li>
+            		<li class="page-item disabled"><a href="#" class="page-link">{% trans "Previous" %}</a></li>
+
+        		{% endif %}
+	        	<li class="page-item disabled"><a href="#" class="page-link">{{ user_list.number }}&nbsp;/&nbsp;{{ user_list.paginator.num_pages }}&nbsp;{% trans "Page" %}</a></li>
+	        	{% if user_list.has_next %}
+	            	<li class="page-item"><a href="?page={{ user_list.next_page_number }}" class="page-link">{% trans "Next" %}</a></li>
+	            	<li class="page-item"><a href="?page={{ user_list.paginator.num_pages }}" class="page-link">{% trans "Last" %}&nbsp;&raquo;</a></li>
+	            {% else %}
+	            	<li class="page-item disabled"><a href="#" class="page-link">{% trans "Next" %}</a></li>
+	            	<li class="page-item disabled"><a href="#" class="page-link">{% trans "Last" %}&nbsp;&raquo;</a></li>
+	        	{% endif %}
+		</ul>
+	</div>
+</div>
+
+
+
+{% endblock content %}

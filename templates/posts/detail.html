@@ -34,8 +34,10 @@
                 {% endif %}
             </form>
             <hr>
-            <span class="small text-muted">{{ object.comments.all|length }}</span><br>
-            <span><i class="fa fa-comment fa-lg" aria-hidden="true"></i></span>
+            <a href="#comment">
+	            <span class="small text-muted">{{ object.comments.all|length }}</span><br>
+	            <span><i class="fa fa-comment fa-lg" aria-hidden="true"></i></span>
+            </a>
         </div>
         <div class="col-sm-10 border-display">
             {% get_current_language as LANGUAGE_CODE %}
@@ -86,7 +88,7 @@
         </div>
     </div>
     {% if comments %}
-        <div class="row comment-row">
+        <div id="comment" class="row comment-row">
             {% for comment in comments %}
                 <div class="col-sm-11 comment">
                     <a href="{% url 'accounts:detail' username=comment.post_user.username %}" class="text-link">{{ comment.post_user.username }}</a>

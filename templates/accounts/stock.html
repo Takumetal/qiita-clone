@@ -13,8 +13,9 @@
                     <small class="text-muted">
                             By&nbsp;<a class="text-link" href="{% url 'accounts:detail' username=post.create_user.username %}">{{ post.create_user.username }}</a>
                             |&nbsp;{{ post.create_date|date:"Y/m/d G:i" }}
-                            <span class="float-right"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i>&nbsp;{{ post.good.all|length }}</span>
-                            <br><span class="float-right"><i class="fa fa-comment fa-lg" aria-hidden="true"></i>&nbsp;{{ post.comments.all|length }}</span></small>
+                            <span class="float-right"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i>&nbsp;{{ post.good.all|length }}</span><br>
+                            <a href="{% url 'posts:detail' username=post.create_user.username pk=post.id %}#comment"><span class="float-right">
+                            <i class="fa fa-comment fa-lg" aria-hidden="true"></i>&nbsp;{{ post.comments.all|length }}</span></a></small>
                     <h4><strong><a class="text-link" href="{% url 'posts:detail' username=post.create_user.username pk=post.id %}">{{ post.title }}</a></strong></h4>
                     <form class="stock_form">
                         {% csrf_token %}

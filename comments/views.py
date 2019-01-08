@@ -10,6 +10,8 @@ from .models import Comment
 
 
 class CommentView(View):
+#     http_method_names = ['get', 'post', 'put', 'patch', 'delete', 'head', 'options', 'trace']
+    http_method_names = ['post']
 
     def post(self, request, *args, **kwargs):
         username = self.kwargs.get('username')

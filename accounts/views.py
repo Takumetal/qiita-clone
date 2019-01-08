@@ -1,5 +1,7 @@
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+from django.core.paginator import Paginator
 from django.http.response import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import DetailView, ListView, View
@@ -27,6 +29,26 @@ class SignUpView(FormView):
         user.save()
         messages.success(self.request, _('Sign up is completed.'))
         return redirect('login')
+
+
+class UserListView(ListView):
+    template_name = 'accounts/user_list.html'
+
+    def get_queryset(self, *args, **kwargs):
+        qs = User.objects.all().order_by('username')
+        paginator = Paginator(qs, settings.USER_LIST_PER_PAGE)
+
+        page_num = self.request.GET.get('page', 1)
+        user_list = paginator.get_page(page_num)
+        return user_list
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(UserListView, self).get_context_data(*args, **kwargs)
+        context['user_list'] = self.get_queryset()
+        return context
+
+    def get(self, request, *args, **kwargs):
+        return super().get(request, **kwargs)
 
 
 class UserDetailView(DetailView):

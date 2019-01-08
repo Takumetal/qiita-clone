@@ -162,3 +162,6 @@ try:
 except Exception as e:
     pass
 
+# Custom settings
+USER_LIST_PER_PAGE = 3
+
