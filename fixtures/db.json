@@ -80,27 +80,11 @@
   }
 },
 {
-  "model": "sessions.session",
-  "pk": "7cjh0nknol3ngrtqff3oisbmqvbsar8t",
-  "fields": {
-    "session_data": "ZjBmNDM2YTE4YWRmOWRkNzAzOTllZjMwMzI2M2FiYzgxZTg2OWI5Nzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI5NGI3MjYwNmQzMzRjMjI2NDIyNzkyMDAxMjRlNzBjODAxMGNhMjU4In0=",
-    "expire_date": "2019-01-22T06:09:39.055Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "qj2r49uygh20vhab4qi2ef6x9gbp93tn",
-  "fields": {
-    "session_data": "NTFmNzgwM2JiMzUwNWE4N2QxNDgyNTk1MWZiMDIwNGRkMjBlZTQyNDp7Il9hdXRoX3VzZXJfaWQiOiI0IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJiY2JkOTZjM2M3MGU4NjZiMDc1ZTMwYTIzODViYzczOWRhZDAzMWFkIn0=",
-    "expire_date": "2019-01-22T06:03:10.318Z"
-  }
-},
-{
   "model": "users.user",
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$120000$dRE9HOqnsbVS$Dmcwl+wpHiDViQcIY0nOYpBWNoVJEnRoMCcwLQqQMEY=",
-    "last_login": "2019-01-08T06:09:39.044Z",
+    "last_login": "2019-01-10T12:20:52.980Z",
     "username": "administrator",
     "email": "administrator@qiitaclone.com",
     "is_active": true,
