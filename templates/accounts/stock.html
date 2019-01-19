@@ -9,11 +9,11 @@
     </div>
     <div class="row">
     	<div class="col-sm-2">
-    		<h5 class="text-center">{% trans "Tag" %}</h5>
+    		<h6 class="text-center">{% trans "Tag" %}</h6>
     		{% if tag_count_dict %}
     			{% for tag, count in tag_count_dict.items %}
     				<hr>
-    				<a href="{% url 'tags:detail' tag=tag %}">{{ tag }}</a><span class="float-right">{{ count }}</span>
+    				<a href="{% url 'tags:detail' tag=tag %}" class="small">{{ tag }}</a><span class="float-right small">{{ count }}</span>
     			{% endfor %}
     		{% endif %}
     	</div>
